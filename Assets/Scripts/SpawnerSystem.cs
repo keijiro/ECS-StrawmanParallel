@@ -45,6 +45,7 @@ public partial struct SpawnerSystem : ISystem
             }
         }
 
-        state.Enabled = false;
+        state.EntityManager.DestroyEntity
+          (SystemAPI.QueryBuilder().WithAll<Spawner>().Build());
     }
 }
