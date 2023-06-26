@@ -8,8 +8,11 @@ public partial struct PulseSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
-      => new PulseUpdateJob() { Time = (float)SystemAPI.Time.ElapsedTime }
-         .ScheduleParallel();
+    {
+        var job = new PulseUpdateJob()
+          { Time = (float)SystemAPI.Time.ElapsedTime };
+        job.ScheduleParallel();
+    }
 }
 
 [BurstCompile(CompileSynchronously = true)]
@@ -20,5 +23,8 @@ partial struct PulseUpdateJob : IJobEntity
     void Execute(ref LocalTransform xform,
                  in Dancer dancer,
                  in Walker walker)
-      => xform.Scale = 1.1f - 0.3f * math.abs(math.cos(dancer.Speed * Time));
+    {
+        var t = dancer.Speed * Time;
+        xform.Scale = 1.1f - 0.3f * math.abs(math.cos(t));
+    }
 }

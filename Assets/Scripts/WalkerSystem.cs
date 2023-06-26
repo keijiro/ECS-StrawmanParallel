@@ -8,8 +8,11 @@ public partial struct WalkerSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
-      => new WalkerUpdateJob() { DeltaTime = SystemAPI.Time.DeltaTime }
-         .ScheduleParallel();
+    {
+        var job = new WalkerUpdateJob()
+          { DeltaTime = SystemAPI.Time.DeltaTime };
+        job.ScheduleParallel();
+    }
 }
 
 [BurstCompile(CompileSynchronously = true)]

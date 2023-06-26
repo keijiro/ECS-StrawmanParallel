@@ -8,8 +8,11 @@ public partial struct DancerSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
-      => new DancerUpdateJob() { Time = (float)SystemAPI.Time.ElapsedTime }
-         .ScheduleParallel();
+    {
+        var job = new DancerUpdateJob()
+          { Time = (float)SystemAPI.Time.ElapsedTime };
+        job.ScheduleParallel();
+    }
 }
 
 [BurstCompile(CompileSynchronously = true)]
