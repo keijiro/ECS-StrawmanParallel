@@ -21,7 +21,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.entities": {
-      "version": "1.0.10",
+      "version": "1.0.11",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -39,11 +39,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.entities.graphics": {
-      "version": "1.0.10",
+      "version": "1.0.11",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.entities": "1.0.10",
+        "com.unity.entities": "1.0.11",
         "com.unity.modules.particlesystem": "1.0.0",
         "com.unity.render-pipelines.core": "14.0.6"
       },
@@ -167,12 +167,6 @@
         "jp.keijiro.klak.lineargradient": "1.0.2"
       },
       "url": "https://registry.npmjs.com"
-    },
-    "com.unity.modules.animation": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {}
     },
     "com.unity.modules.assetbundle": {
       "version": "1.0.0",
