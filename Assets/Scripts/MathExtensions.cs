@@ -10,4 +10,7 @@ public static class MathExtensions
             if (math.length(v) <= 1) return math.float3(v.x, 0, v.y);
         }
     }
+
+    public static quaternion NextYRotation(this ref Random self)
+      => quaternion.RotateY(self.NextFloat(math.PI * 2));
 }

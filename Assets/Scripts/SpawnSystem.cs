@@ -26,7 +26,7 @@ public partial struct SpawnSystem : ISystem
             ref var dancer = ref SystemAPI.GetComponentRW<Dancer>(entity).ValueRW;
             ref var walker = ref SystemAPI.GetComponentRW<Walker>(entity).ValueRW;
             xform.Position = random.NextOnDisk() * config.SpawnRadius;
-            xform.Rotation = quaternion.RotateY(random.NextFloat(math.PI * 2));
+            xform.Rotation = random.NextYRotation();
             dancer.Speed = random.NextFloat(1, 8);
             walker.ForwardSpeed = random.NextFloat(0.1f, 0.8f);
             walker.AngularSpeed = random.NextFloat(0.5f, 4);
