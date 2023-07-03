@@ -23,33 +23,29 @@ public partial class SpawnSystem : SystemBase
                           ref Dancer dancer,
                           ref Walker walker) =>
         {
-            var random = Random.CreateFromIndex
+            var rnd = Random.CreateFromIndex
               (config.RandomSeed + (uint)entityInQueryIndex);
 
-            xform.Position = random.NextOnDisk() * config.SpawnRadius;
-            xform.Rotation = random.NextYRotation();
+            xform = LocalTransform.FromPositionRotation
+              (rnd.NextOnDisk() * config.SpawnRadius, rnd.NextYRotation());
 
-            dancer.Speed = random.NextFloat(1, 8);
-
-            walker.ForwardSpeed = random.NextFloat(0.1f, 0.8f);
-            walker.AngularSpeed = random.NextFloat(0.5f, 4);
+            dancer = Dancer.Random(rnd.NextUInt());
+            walker = Walker.Random(rnd.NextUInt());
         })
         .ScheduleParallel();
 #else
-        var random = new Random(config.RandomSeed);
+        var rnd = new Random(config.RandomSeed);
         foreach (var entity in instances)
         {
             var xform = SystemAPI.GetComponentRW<LocalTransform>(entity);
             var dancer = SystemAPI.GetComponentRW<Dancer>(entity);
             var walker = SystemAPI.GetComponentRW<Walker>(entity);
 
-            xform.ValueRW.Position = random.NextOnDisk() * config.SpawnRadius;
-            xform.ValueRW.Rotation = random.NextYRotation();
+            xform.ValueRW = LocalTransform.FromPositionRotation
+              (rnd.NextOnDisk() * config.SpawnRadius, rnd.NextYRotation());
 
-            dancer.ValueRW.Speed = random.NextFloat(1, 8);
-
-            walker.ValueRW.ForwardSpeed = random.NextFloat(0.1f, 0.8f);
-            walker.ValueRW.AngularSpeed = random.NextFloat(0.5f, 4);
+            dancer.ValueRW = Dancer.Random(rnd.NextUInt());
+            walker.ValueRW = Walker.Random(rnd.NextUInt());
         }
 #endif
 

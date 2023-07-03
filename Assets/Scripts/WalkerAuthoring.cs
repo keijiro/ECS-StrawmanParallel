@@ -1,16 +1,24 @@
 using Unity.Entities;
 using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 public struct Walker : IComponentData
 {
     public float ForwardSpeed;
     public float AngularSpeed;
+
+    public static Walker Random(uint seed)
+    {
+        var random = new Random(seed);
+        return new Walker() { ForwardSpeed = random.NextFloat(0.1f, 0.8f),
+                              AngularSpeed = random.NextFloat(0.5f, 4) };
+    }
 }
 
 public class WalkerAuthoring : MonoBehaviour
 {
-    public float _forwardSpeed = 1;
-    public float _angularSpeed = 1;
+    public float ForwardSpeed = 1;
+    public float AngularSpeed = 1;
 
     class Baker : Baker<WalkerAuthoring>
     {
@@ -18,8 +26,8 @@ public class WalkerAuthoring : MonoBehaviour
         {
             var data = new Walker()
             {
-                ForwardSpeed = src._forwardSpeed,
-                AngularSpeed = src._angularSpeed
+                ForwardSpeed = src.ForwardSpeed,
+                AngularSpeed = src.AngularSpeed
             };
             AddComponent(GetEntity(TransformUsageFlags.Dynamic), data);
         }
