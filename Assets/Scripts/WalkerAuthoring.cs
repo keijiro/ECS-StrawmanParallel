@@ -10,8 +10,8 @@ public struct Walker : IComponentData
     public static Walker Random(uint seed)
     {
         var random = new Random(seed);
-        return new Walker() { ForwardSpeed = random.NextFloat(0.1f, 0.8f),
-                              AngularSpeed = random.NextFloat(0.5f, 4) };
+        return new Walker(){ ForwardSpeed = random.NextFloat(0.1f, 0.8f),
+                             AngularSpeed = random.NextFloat(0.5f, 4) };
     }
 }
 

@@ -7,7 +7,7 @@ public struct Dancer : IComponentData
     public float Speed;
 
     public static Dancer Random(uint seed)
-      => new Dancer() { Speed = new Random(seed).NextFloat(1, 8) };
+      => new Dancer(){ Speed = new Random(seed).NextFloat(1, 8) };
 }
 
 public class DancerAuthoring : MonoBehaviour
