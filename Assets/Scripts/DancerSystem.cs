@@ -10,20 +10,20 @@ public partial struct DancerSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var job = new DancerUpdateJob()
-          { Time = (float)SystemAPI.Time.ElapsedTime };
+          { Elapsed = (float)SystemAPI.Time.ElapsedTime };
         job.ScheduleParallel();
     }
 }
 
-[BurstCompile(CompileSynchronously = true)]
+[BurstCompile]
 partial struct DancerUpdateJob : IJobEntity
 {
-    public float Time;
+    public float Elapsed;
 
-    void Execute(ref LocalTransform xform,
-                 in Dancer dancer)
+    void Execute(in Dancer dancer,
+                 ref LocalTransform xform)
     {
-        var t = dancer.Speed * Time;
+        var t = dancer.Speed * Elapsed;
         var y = math.abs(math.sin(t)) * 0.1f;
         var bank = math.cos(t) * 0.5f;
 

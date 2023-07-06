@@ -15,13 +15,13 @@ public partial struct WalkerSystem : ISystem
     }
 }
 
-[BurstCompile(CompileSynchronously = true)]
+[BurstCompile]
 partial struct WalkerUpdateJob : IJobEntity
 {
     public float DeltaTime;
 
-    void Execute(ref LocalTransform xform,
-                 in Walker walker)
+    void Execute(in Walker walker,
+                 ref LocalTransform xform)
     {
         var rot = quaternion.RotateY(walker.AngularSpeed * DeltaTime);
         var fwd = math.mul(rot, xform.Forward());
