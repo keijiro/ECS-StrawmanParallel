@@ -3,7 +3,6 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-[BurstCompile]
 public partial struct WalkerSystem : ISystem
 {
     [BurstCompile]

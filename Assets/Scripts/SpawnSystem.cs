@@ -4,10 +4,9 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-[BurstCompile]
+[UpdateInGroup(typeof(InitializationSystemGroup))]
 public partial struct SpawnSystem : ISystem
 {
-    [BurstCompile]
     public void OnCreate(ref SystemState state)
       => state.RequireForUpdate<Config>();
 
