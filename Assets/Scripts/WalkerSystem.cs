@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
+[UpdateBefore(typeof(TransformSystemGroup))]
 public partial struct WalkerSystem : ISystem
 {
     [BurstCompile]
